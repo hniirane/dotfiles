@@ -15,5 +15,5 @@ clearTestDb() {
 alias pipes='~/.bash/pipes.sh'
 alias softclear_cache=clearCache
 alias purge_testdb=clearTestDb
-alias xdebug_enable='sudo php5enmod xdebug'
-alias xdebug_disable='sudo php5dismod xdebug'
+alias xdebug_enable='sudo phpenmod xdebug'
+alias xdebug_disable='sudo phpdismod xdebug'
