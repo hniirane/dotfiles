@@ -4,7 +4,7 @@ clearCache() {
         if  [[ $(php -v | grep debug) ]] ; then
                 echo "Disabling xdebug"
                 ENABLE_DEBUG="true"
-                xdebug_disable >&/dev/null
+                sudo phpdismod xdebug >&/dev/null
         fi
         # Get the env to clear from the first argument $1
         if [ -z $ENV ] ; then
@@ -14,7 +14,7 @@ clearCache() {
         fi
         if [ "$ENABLE_DEBUG" == "true" ] ; then
                 echo "Enabling xdebug"
-                xdebug_enable >&/dev/null
+                sudo phpendmod xdebug >&/dev/null
         fi
 }
 
