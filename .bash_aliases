@@ -1,11 +1,21 @@
 clearCache() {
-    	# Get the env to clear from the first argument $1
-	if [ -z $1 ]
-	then
-		php app/console cache:clear
-	else
-		php app/console cache:clear --env test
-	fi    
+        ENV=$1
+        ENABLE_DEBUG="false"
+        if  [[ $(php -v | grep debug) ]] ; then
+                echo "Disabling xdebug"
+                ENABLE_DEBUG="true"
+                xdebug_disable >&/dev/null
+        fi
+        # Get the env to clear from the first argument $1
+        if [ -z $ENV ] ; then
+                php app/console cache:clear --env test --no-debug
+        else
+                php app/console cache:clear --env $ENV --no-debug
+        fi
+        if [ "$ENABLE_DEBUG" == "true" ] ; then
+                echo "Enabling xdebug"
+                xdebug_enable >&/dev/null
+        fi
 }
 
 clearTestDb() {
